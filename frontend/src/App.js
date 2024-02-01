@@ -5,6 +5,8 @@ import axios from "axios";
 import { Route, Switch } from "react-router-dom";
 import HomePage from "./components/HomePage/HomePage";
 import NavBar from "./components/NavBar/NavBar";
+import About from "./components/About/About";
+import Contact from "./components/Contact/Contact";
 
 function App() {
   // const {
@@ -67,6 +69,12 @@ function App() {
       <Switch>
         <Route exact path="/">
           <HomePage />
+        </Route>
+        <Route path="/about">
+          <About />
+        </Route>
+        <Route path="/contact">
+          <Contact />
         </Route>
       </Switch>
     </>
