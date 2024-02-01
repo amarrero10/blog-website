@@ -7,6 +7,7 @@ import HomePage from "./components/HomePage/HomePage";
 import NavBar from "./components/NavBar/NavBar";
 import About from "./components/About/About";
 import Contact from "./components/Contact/Contact";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   // const {
@@ -77,6 +78,7 @@ function App() {
           <Contact />
         </Route>
       </Switch>
+      <Footer />
     </>
   );
 }

@@ -5,12 +5,13 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import logo from "../../assets/blog-logo.png";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 
+// For menu items
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
 export default function NavBar() {
-  const [activeLink, setActiveLink] = useState("posts");
+  const [activeLink, setActiveLink] = useState("blogs");
 
   const handleLinkClick = (link) => {
     setActiveLink(link);
@@ -24,7 +25,7 @@ export default function NavBar() {
             <div className="flex h-16 justify-between">
               <div className="flex px-2 lg:px-0">
                 <div className="flex flex-shrink-0 items-center">
-                  <Link to="/" onClick={() => handleLinkClick("posts")}>
+                  <Link to="/" onClick={() => handleLinkClick("blogs")}>
                     <img className="sm:h-10 h-8 w-auto" src={logo} alt="Underdog Coding" />
                   </Link>
                 </div>
@@ -32,14 +33,14 @@ export default function NavBar() {
                   {/* Current: "border-indigo-500 text-gray-900", Default: "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700" */}
                   <Link
                     to="/"
-                    onClick={() => handleLinkClick("posts")}
+                    onClick={() => handleLinkClick("blogs")}
                     className={`${
-                      activeLink === "posts"
+                      activeLink === "blogs"
                         ? "border-indigo-500 text-gray-900"
                         : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
                     } inline-flex items-center px-1 pt-1 border-b-2 font-light text-2xl`}
                   >
-                    Posts
+                    Blog
                   </Link>
                   <Link
                     to="/about"
@@ -78,7 +79,7 @@ export default function NavBar() {
                       id="search"
                       name="search"
                       className="block w-full rounded-md border-0 bg-white py-1.5 pl-10 pr-3 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      placeholder="Search"
+                      placeholder="Search For Post..."
                       type="search"
                     />
                   </div>
@@ -178,7 +179,7 @@ export default function NavBar() {
           <Disclosure.Panel className="lg:hidden bg-white">
             <div className="space-y-1 pb-3 pt-2 bg-white">
               {/* Current: "bg-indigo-50 border-indigo-500 text-indigo-700", Default: "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800" */}
-              <Link to="/" onClick={() => handleLinkClick("posts")}>
+              <Link to="/" onClick={() => handleLinkClick("blogs")}>
                 <Disclosure.Button
                   as="a"
                   className="block border-l-4 border-transparent py-2 pl-3 pr-4 font-light text-xl text-gray-600 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-800"
