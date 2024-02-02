@@ -1,6 +1,41 @@
 import { BuildingOffice2Icon, EnvelopeIcon, PhoneIcon } from "@heroicons/react/24/outline";
+import { useRef, useState } from "react";
+import emailjs from "@emailjs/browser";
 
 export default function Contact() {
+  const form = useRef();
+  const [status, setStatus] = useState("Submit!");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [message, setMessage] = useState("");
+
+  const myEmail = "albert.marrero10@gmail.com";
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    emailjs.sendForm("service_zlanr09", "template_nupgdxh", form.current, "jwLUixlerwVK9ReDL").then(
+      (result) => {
+        console.log(result);
+      },
+      (error) => {
+        console.log(error.text);
+      }
+    );
+
+    setStatus("Message Sent!");
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setMessage("");
+
+    // Reset status to "Submit!" after 3000 milliseconds (3 seconds)
+    setTimeout(() => {
+      setStatus("Submit!");
+    }, 3000);
+  };
+
   const footerNavigation = {
     // solutions: [
     //   { name: "Marketing", href: "#" },
@@ -143,7 +178,11 @@ export default function Contact() {
             </div>
           </div>
         </div>
-        <form action="#" method="POST" className="px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-48">
+        <form
+          ref={form}
+          onSubmit={handleSubmit}
+          className="px-6 pb-24 pt-20 sm:pb-32 lg:px-8 lg:py-48"
+        >
           <div className="mx-auto max-w-xl lg:mr-0 lg:max-w-lg">
             <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2">
               <div>
@@ -156,9 +195,11 @@ export default function Contact() {
                 <div className="mt-2.5">
                   <input
                     type="text"
-                    name="first-name"
+                    name="user_name"
                     id="first-name"
                     autoComplete="given-name"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
                     className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -173,8 +214,10 @@ export default function Contact() {
                 <div className="mt-2.5">
                   <input
                     type="text"
-                    name="last-name"
+                    name="user_last_name"
                     id="last-name"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
                     autoComplete="family-name"
                     className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
@@ -190,9 +233,11 @@ export default function Contact() {
                 <div className="mt-2.5">
                   <input
                     type="email"
-                    name="email"
+                    name="user_email"
                     id="email"
                     autoComplete="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
@@ -208,11 +253,12 @@ export default function Contact() {
                 <div className="mt-2.5">
                   <textarea
                     name="message"
+                    value={message}
+                    onChange={(e) => setMessage(e.target.value)}
                     id="message"
                     rows={4}
                     placeholder="Type your message here..."
                     className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                    defaultValue={""}
                   />
                 </div>
               </div>
@@ -222,7 +268,7 @@ export default function Contact() {
                 type="submit"
                 className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
               >
-                Send message
+                {status}
               </button>
             </div>
           </div>
