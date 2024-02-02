@@ -140,11 +140,11 @@ function About() {
           />
           <div className="mx-auto max-w-7xl px-6 py-32 sm:py-40 lg:px-8">
             <div className="mx-auto max-w-2xl lg:mx-0 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-6 xl:grid-cols-1 xl:grid-rows-1 xl:gap-x-8">
-              <h1 className="max-w-2xl text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl lg:col-span-2 xl:col-auto">
+              <h1 className="max-w-2xl text-4xl font-coolregular text-gray-900 sm:text-6xl lg:col-span-2 xl:col-auto">
                 Embracing the Underdog Coding Journey 🚀
               </h1>
               <div className="mt-6 max-w-xl lg:mt-0 xl:col-end-1 xl:row-start-1">
-                <p className="text-lg leading-8 text-gray-600">
+                <p className="text-xl leading-8 text-gray-600 font-coolthin">
                   Hey there! I'm Albert, an underdog explorer in the vast landscape of coding and
                   technology. My journey into the tech realm is anything but conventional. As I
                   navigate this exciting path, I'm dedicated to crafting my digital narrative and
@@ -166,7 +166,7 @@ function About() {
 
         {/* Timeline section */}
         <div className="mx-auto -mt-8 max-w-7xl px-6 lg:px-8">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl pb-10">
+          <h2 className="text-3xl font-coolregular tracking-tight text-gray-900 sm:text-5xl pb-10">
             The Journey So Far
           </h2>
           <div className="mx-auto grid max-w-2xl grid-cols-1 gap-8 overflow-hidden lg:mx-0 lg:max-w-none lg:grid-cols-4">
@@ -174,7 +174,7 @@ function About() {
               <div key={item.name}>
                 <time
                   dateTime={item.dateTime}
-                  className="flex items-center text-sm font-semibold leading-6 text-indigo-600"
+                  className="flex items-center text-lg  font-coolthin leading-6 text-indigo-600"
                 >
                   <svg viewBox="0 0 4 4" className="mr-4 h-1 w-1 flex-none" aria-hidden="true">
                     <circle cx={2} cy={2} r={2} fill="currentColor" />

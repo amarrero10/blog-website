@@ -23,18 +23,17 @@ function Posts() {
   }, [blogs]); // The empty dependency array ensures this effect runs only once, similar to componentDidMount
 
   return (
-    <div className="relative isolate -z-10 top-20 max-w-7xl mx-auto">
-      <h2>Blog</h2>
-      <h1>Welcome to the Journey!</h1>
-      <p>
-        Join me as I share insights, challenges, and victories, shaping my path in the tech realm.
+    <div className="relative isolate -z-10 top-44 max-w-7xl mx-auto">
+      <h2 className="text-3xl font-coolitalic sm:mb-6 ">Blog</h2>
+      <h1 className=" text-6xl font-coolregular sm:mb-6">Welcome to the Journey </h1>
+      <p className=" text-4xl font-coolthin text-slate-500 tracking-wide">
         Whether you're a fellow coder, tech enthusiast, or curious soul, there's something here for
         everyone. Let's explore the future together!
       </p>
 
       {blogs.map((blog) => {
         return (
-          <div key={blog._id}>
+          <div key={blog._id} className=" font-coolregular">
             <h1>{blog.title}</h1>
             <p>{blog.content}</p>
           </div>

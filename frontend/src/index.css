@@ -1,3 +1,28 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "cool italic";
+  src: url("../public/fonts/coolvetica//coolvetica\ rg\ it.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "cool regular";
+  src: url("../public/fonts/coolvetica/coolvetica\ rg.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "cool thin";
+  src: url("../public/fonts/coolvetica/coolvetica\ condensed\ rg.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "cool compressed";
+  src: url("../public/fonts/coolvetica/coolvetica\ compressed\ hv.otf") format("opentype");
+}
+
+@font-face {
+  font-family: "cool crammed";
+  src: url("../public/fonts/coolvetica/coolvetica\ crammed\ rg.otf") format("opentype");
+}
