@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
+import { format } from "date-fns";
 
 function Posts() {
   const [blogs, setBlogs] = useState([]);
@@ -22,21 +23,42 @@ function Posts() {
     fetchBlogs();
   }, [blogs]); // The empty dependency array ensures this effect runs only once, similar to componentDidMount
 
+  // Inside your component function
+  const formattedDate = (dateString) => {
+    // Use the 'format' function to convert the date string to the desired format
+    return format(new Date(dateString), "MMMM dd, yyyy");
+  };
+
   return (
-    <div className="relative isolate -z-10 top-44 max-w-7xl mx-auto">
-      <h2 className="text-3xl font-coolitalic sm:mb-6 ">Blog</h2>
-      <h1 className=" text-6xl font-coolregular sm:mb-6">Welcome to the Journey </h1>
-      <p className=" text-4xl font-coolthin text-slate-500 tracking-wide">
+    <div className="relative isolate -z-10 sm:top-44 top-32 max-w-7xl mx-auto">
+      <h2 className="sm:text-3xl text-2xl font-coolitalic sm:mb-6 ">Blog</h2>
+      <h1 className=" sm:text-6xl text-4xl mt-6 font-coolregular sm:mb-6">
+        Welcome to the Journey{" "}
+      </h1>
+      <p className=" sm:text-4xl font-coolthin text-slate-500 tracking-wide">
         Whether you're a fellow coder, tech enthusiast, or curious soul, there's something here for
         everyone. Let's explore the future together!
       </p>
 
+      <hr className="mt-6 border-t-2 border-gray-200" />
       {blogs.map((blog) => {
         return (
-          <div key={blog._id} className=" font-coolregular">
-            <h1>{blog.title}</h1>
-            <p>{blog.content}</p>
-          </div>
+          <>
+            <div key={blog._id} className=" font-coolregular flex justify-between">
+              <div>
+                {blog.author ? <p>{blog.author}</p> : null}
+                {blog.createdAt ? <p>{formattedDate(blog.createdAt)}</p> : null}
+                {blog.updatedAt && blog.updatedAt !== blog.createdAt ? (
+                  <p>{"Updated on " + formattedDate(blog.updatedAt)}</p>
+                ) : null}
+              </div>
+              <div>
+                <h1>{blog.title}</h1>
+                <p>{blog.content}</p>
+              </div>
+            </div>
+            <hr className="mt-6 border-t-2 border-gray-200" />
+          </>
         );
       })}
       <nav className="flex items-center justify-between border-t border-gray-200 px-4 sm:px-0">

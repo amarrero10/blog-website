@@ -20,12 +20,23 @@ const verifyJwt = jwt({
 
 // Create a new post
 // Add verifyJwt when in production to protect route
-router.post("/create/posts", async (req, res) => {
+router.post("/posts", async (req, res) => {
   try {
     const { title, content } = req.body;
     const newPost = new Post({ title, content });
     await newPost.save();
     res.status(201).json(newPost);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+router.put("/posts/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { title, content } = req.body;
+    const updatedPost = await Post.findByIdAndUpdate(id, { title, content }, { new: true });
+    res.json(updatedPost);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
