@@ -9,7 +9,11 @@ module.exports = {
       coolcompressed: ["cool compressed", "sans-serif"],
       coolcrammed: ["cool crammed", "sans-serif"],
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        blogPattern: "url('/src/assets/geometric.jpg')",
+      },
+    },
   },
   plugins: [
     require("@tailwindcss/forms"),
