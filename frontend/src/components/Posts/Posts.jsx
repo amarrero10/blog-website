@@ -4,6 +4,7 @@ import axios from "axios";
 import { format } from "date-fns";
 import { Link } from "react-router-dom/cjs/react-router-dom.min";
 import Loader from "../Loader/Loader";
+import SignUp from "../SignUp/SignUp";
 
 function Posts() {
   const [blogs, setBlogs] = useState([]);
@@ -31,6 +32,18 @@ function Posts() {
   const formattedDate = (dateString) => {
     // Use the 'format' function to convert the date string to the desired format
     return format(new Date(dateString), "MMMM dd, yyyy");
+  };
+
+  const [email, setEmail] = useState("");
+  const [isValidEmail, setIsValidEmail] = useState(true);
+
+  const handleChange = (e) => {
+    const inputEmail = e.target.value;
+    setEmail(inputEmail);
+
+    // Basic email validation
+    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(inputEmail);
+    setIsValidEmail(isValid);
   };
 
   return (
@@ -194,6 +207,9 @@ function Posts() {
             </a>
           </div>
         </nav>
+        <div className=" mb-48 mt-20">
+          <SignUp email={email} handleChange={handleChange} />
+        </div>
       </div>
     </div>
   );
