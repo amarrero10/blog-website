@@ -8,6 +8,7 @@ import NavBar from "./components/NavBar/NavBar";
 import About from "./components/About/About";
 import Contact from "./components/Contact/Contact";
 import Footer from "./components/Footer/Footer";
+import Post from "./components/Post/Post";
 
 function App() {
   // const {
@@ -76,6 +77,9 @@ function App() {
         </Route>
         <Route path="/contact">
           <Contact />
+        </Route>
+        <Route path="/posts/:id">
+          <Post />
         </Route>
       </Switch>
       <Footer />

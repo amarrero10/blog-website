@@ -2,9 +2,12 @@ import React, { useEffect, useState } from "react";
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from "@heroicons/react/20/solid";
 import axios from "axios";
 import { format } from "date-fns";
+import { Link } from "react-router-dom/cjs/react-router-dom.min";
+import Loader from "../Loader/Loader";
 
 function Posts() {
   const [blogs, setBlogs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   // This useEffect hook will run when the component mounts
   useEffect(() => {
@@ -14,6 +17,7 @@ function Posts() {
         const response = await axios.get("http://localhost:8000/api/posts");
         const data = response.data; // Assuming the response is already JSON
         setBlogs(data);
+        setLoading(false);
       } catch (error) {
         console.error("Error fetching blogs:", error);
       }
@@ -41,9 +45,16 @@ function Posts() {
           for everyone. Let's explore the future together!
         </p>
 
+        {loading && (
+          <div className=" mt-10">
+            <Loader />
+          </div>
+        )}
+
         <hr className="mt-20 border-t-2 border-gray-200" />
-        {blogs.map((blog) => {
-          return (
+
+        {!loading &&
+          blogs.map((blog) => (
             <>
               <div
                 key={blog._id}
@@ -70,9 +81,11 @@ function Posts() {
                     {blog.content}
                   </p>
                   <div>
-                    <button class="mb-4 text-lg font-coolregular tracking-wide bg-slate-700 text-white leading-6 capitalize duration-100 transform rounded-full shadow cursor-pointer focus:ring-4 focus:ring-slate-700 focus:ring-opacity-50 w-[120px] px-4 py-3 focus:outline-none hover:shadow-lg hover:-translate-y-1">
-                      Read More
-                    </button>
+                    <Link to={`/posts/${blog._id}`}>
+                      <button class="mb-4 text-lg font-coolregular tracking-wide bg-slate-700 text-white leading-6 capitalize duration-100 transform rounded-full shadow cursor-pointer focus:ring-4 focus:ring-slate-700 focus:ring-opacity-50 w-[120px] px-4 py-3 focus:outline-none hover:shadow-lg hover:-translate-y-1">
+                        Read More
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -98,24 +111,26 @@ function Posts() {
                   {blog.content}
                 </p>
                 {/* TODO: ADD LINK TO REDIRECT TO SPECIFIC POST */}
-                <button className="mt-4 bg-slate-700 text-white font-coolregular tracking-wide px-4 py-2 mb-10 rounded-full w-1/2 flex justify-around">
-                  Read More
-                  <svg
-                    width="24"
-                    height="24"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill-rule="evenodd"
-                    fill="white"
-                    clip-rule="evenodd"
-                  >
-                    <path d="M12 0c-6.623 0-12 5.377-12 12s5.377 12 12 12 12-5.377 12-12-5.377-12-12-12zm0 1c-6.071 0-11 4.929-11 11s4.929 11 11 11 11-4.929 11-11-4.929-11-11-11zm4.828 11.5l-4.608 3.763.679.737 6.101-5-6.112-5-.666.753 4.604 3.747h-11.826v1h11.828z" />
-                  </svg>
-                </button>
+                <Link to={`/posts/${blog._id}`}>
+                  <button className="mt-4 bg-slate-700 text-white font-coolregular tracking-wide px-4 py-2 mb-10 rounded-full w-1/2 flex justify-around">
+                    Read More
+                    <svg
+                      width="24"
+                      height="24"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill-rule="evenodd"
+                      fill="white"
+                      clip-rule="evenodd"
+                    >
+                      <path d="M12 0c-6.623 0-12 5.377-12 12s5.377 12 12 12 12-5.377 12-12-5.377-12-12-12zm0 1c-6.071 0-11 4.929-11 11s4.929 11 11 11 11-4.929 11-11-4.929-11-11-11zm4.828 11.5l-4.608 3.763.679.737 6.101-5-6.112-5-.666.753 4.604 3.747h-11.826v1h11.828z" />
+                    </svg>
+                  </button>
+                </Link>
               </div>
               {blog !== blogs.length - 1 ? <hr className="border-t-2 border-gray-200" /> : null}
             </>
-          );
-        })}
+          ))}
+
         <nav className="flex items-center justify-between px-4 sm:px-0 sm:py-10">
           <div className="-mt-px flex w-0 flex-1">
             <a
